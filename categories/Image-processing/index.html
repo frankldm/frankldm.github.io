@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015/5 | Frank&#39;s blog</title>
+  <title>Category: Image processing | Frank&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="We come on a pilgrimage for Buddhist scriptur">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Frank's blog">
-<meta property="og:url" content="http://yoursite.com/archives/2015/05/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/Image-processing/index.html">
 <meta property="og:site_name" content="Frank's blog">
 <meta property="og:description" content="We come on a pilgrimage for Buddhist scriptur">
 <meta name="twitter:card" content="summary">
@@ -65,36 +65,171 @@
       <div class="outer">
         <section id="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/05/05/travel_guide_dennis/" class="archive-article-date">
-  <time datetime="2015-05-05T19:05:00.000Z" itemprop="datePublished">5月 5</time>
+    <article id="post-deterministic" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/22/deterministic/" class="article-date">
+  <time datetime="2014-06-21T22:00:00.000Z" itemprop="datePublished">6月 22 2014</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Image-processing/">Image processing</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/05/05/travel_guide_dennis/">Some advises for Dennis&#39; travel to China</a>
+      <a class="article-title" href="/2014/06/22/deterministic/">Deterministic Vs Stochastic</a>
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<h4 id="Deterministic:_确知性">Deterministic: 确知性</h4><p>在信号中，是指可以用一个函数来表示某时刻的输出，即t时刻出现的信号是固定的.</p>
+<h4 id="Stochastic:_随机性">Stochastic: 随机性</h4><p>指随机性，某时刻出现的信号是某概率分布，有可能是任意值.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/06/22/deterministic/" data-id="ci9cho956000jj0fm73xnmleq" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2014/06/22/deterministic/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
   </div>
+  
 </article>
+
+
   
+    <article id="post-ILPF" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/09/ILPF/" class="article-date">
+  <time datetime="2014-06-08T22:00:00.000Z" itemprop="datePublished">6月 9 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Image-processing/">Image processing</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    </div></section>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/06/09/ILPF/">Ideal Low-Pass Filter</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>%IDEAL LOW-PASS FILTER</code></p>
+<p><code>%Part 1</code></p>
+<pre><code>f=imread(X);                          <span class="comment">% reading an image X</span>
+
+<span class="comment">%% f = rgb2gray(f);                    % if the image is gray instead of colour, rgb2gray can help convert 3 channels into 2 channels</span>
+
+P = <span class="number">20</span>;                             <span class="comment">% P=input('Enter the cut-off frequency'); </span>
+
+<span class="matrix">[M,N]</span>=<span class="built_in">size</span>(f);                         <span class="comment">% Saving the the rows of X in M and columns in N</span>
+
+F=fft2(double(f));                     <span class="comment">% Taking Fourier transform to the input image</span>
+</code></pre><p><code>%Part 2 % Finding the distance matrix D which is required to create the filter mask</code></p>
+<pre><code><span class="keyword">u</span>=0:(<span class="keyword">M</span>-1);
+v=0:(<span class="keyword">N</span>-1);      
+idx=find(<span class="keyword">u</span>&gt;<span class="keyword">M</span>/2);   
+<span class="keyword">u</span>(idx)=<span class="keyword">u</span>(idx)-<span class="keyword">M</span>;
+idy=find(v&gt;<span class="keyword">N</span>/2);
+v(idy)=v(idy)-<span class="keyword">N</span>;
+[V,<span class="keyword">U</span>]=meshgrid(v,<span class="keyword">u</span>);
+<span class="keyword">D</span>=<span class="literal">sqrt</span>(<span class="keyword">U</span>.^2+V.^2);
+</code></pre><p><code>%Part 3</code></p>
+<pre><code><span class="keyword">H</span>=double(<span class="keyword">D</span>&lt;=P);                     % Comparing with the cut-off frequency to create filter mask 
+<span class="keyword">G</span>=<span class="keyword">H</span>.*F;                               % Multiplying the Fourier transformed image with <span class="literal">H</span>
+<span class="keyword">g</span>=<span class="literal">real</span>(ifft2(double(<span class="keyword">G</span>)));             % Inverse Fourier transform
+imshow(f),figure,imshow(<span class="keyword">g</span>,[ ]);       % Displaying <span class="keyword">input</span> and output image
+</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2014/06/09/ILPF/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/06/09/ILPF/" data-id="ci9cho959000lj0fm3izpkt36" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2014/06/09/ILPF/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-story of lenna" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/05/31/story of lenna/" class="article-date">
+  <time datetime="2014-05-31T18:11:11.000Z" itemprop="datePublished">5月 31 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Image-processing/">Image processing</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/05/31/story of lenna/">莱纳的故事</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png" alt="Lenna"> </p>
+<p>
+        
+          <p class="article-more-link">
+            <a href="/2014/05/31/story of lenna/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/05/31/story of lenna/" data-id="ci9cho94x0005j0fmvp2wyses" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2014/05/31/story of lenna/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
   
 </section>
         

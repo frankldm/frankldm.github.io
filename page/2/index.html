@@ -8,7 +8,7 @@
   <meta name="description" content="We come on a pilgrimage for Buddhist scriptur">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Frank's blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Frank's blog">
 <meta property="og:description" content="We come on a pilgrimage for Buddhist scriptur">
 <meta name="twitter:card" content="summary">
@@ -65,14 +65,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-travel_guide_dennis" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-deterministic" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/05/05/travel_guide_dennis/" class="article-date">
-  <time datetime="2015-05-05T19:05:00.000Z" itemprop="datePublished">5月 5 2015</time>
+    <a href="/2014/06/22/deterministic/" class="article-date">
+  <time datetime="2014-06-21T22:00:00.000Z" itemprop="datePublished">6月 22 2014</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Travelling/">Travelling</a>
+    <a class="article-category-link" href="/categories/Image-processing/">Image processing</a>
   </div>
 
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/05/travel_guide_dennis/">Some advises for Dennis&#39; travel to China</a>
+      <a class="article-title" href="/2014/06/22/deterministic/">Deterministic Vs Stochastic</a>
     </h1>
   
 
@@ -91,18 +91,88 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Travel_Guide">Travel Guide</h1><p>There is english website for foreigner travellers.<br><code>http://www.travelchinaguide.com/</code><br>
+        <a id="more"></a>
+<h4 id="Deterministic:_确知性">Deterministic: 确知性</h4><p>在信号中，是指可以用一个函数来表示某时刻的输出，即t时刻出现的信号是固定的.</p>
+<h4 id="Stochastic:_随机性">Stochastic: 随机性</h4><p>指随机性，某时刻出现的信号是某概率分布，有可能是任意值.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/06/22/deterministic/" data-id="ci9cho956000jj0fm73xnmleq" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2014/06/22/deterministic/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ILPF" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/06/09/ILPF/" class="article-date">
+  <time datetime="2014-06-08T22:00:00.000Z" itemprop="datePublished">6月 9 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Image-processing/">Image processing</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/06/09/ILPF/">Ideal Low-Pass Filter</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>%IDEAL LOW-PASS FILTER</code></p>
+<p><code>%Part 1</code></p>
+<pre><code>f=imread(X);                          <span class="comment">% reading an image X</span>
+
+<span class="comment">%% f = rgb2gray(f);                    % if the image is gray instead of colour, rgb2gray can help convert 3 channels into 2 channels</span>
+
+P = <span class="number">20</span>;                             <span class="comment">% P=input('Enter the cut-off frequency'); </span>
+
+<span class="matrix">[M,N]</span>=<span class="built_in">size</span>(f);                         <span class="comment">% Saving the the rows of X in M and columns in N</span>
+
+F=fft2(double(f));                     <span class="comment">% Taking Fourier transform to the input image</span>
+</code></pre><p><code>%Part 2 % Finding the distance matrix D which is required to create the filter mask</code></p>
+<pre><code><span class="keyword">u</span>=0:(<span class="keyword">M</span>-1);
+v=0:(<span class="keyword">N</span>-1);      
+idx=find(<span class="keyword">u</span>&gt;<span class="keyword">M</span>/2);   
+<span class="keyword">u</span>(idx)=<span class="keyword">u</span>(idx)-<span class="keyword">M</span>;
+idy=find(v&gt;<span class="keyword">N</span>/2);
+v(idy)=v(idy)-<span class="keyword">N</span>;
+[V,<span class="keyword">U</span>]=meshgrid(v,<span class="keyword">u</span>);
+<span class="keyword">D</span>=<span class="literal">sqrt</span>(<span class="keyword">U</span>.^2+V.^2);
+</code></pre><p><code>%Part 3</code></p>
+<pre><code><span class="keyword">H</span>=double(<span class="keyword">D</span>&lt;=P);                     % Comparing with the cut-off frequency to create filter mask 
+<span class="keyword">G</span>=<span class="keyword">H</span>.*F;                               % Multiplying the Fourier transformed image with <span class="literal">H</span>
+<span class="keyword">g</span>=<span class="literal">real</span>(ifft2(double(<span class="keyword">G</span>)));             % Inverse Fourier transform
+imshow(f),figure,imshow(<span class="keyword">g</span>,[ ]);       % Displaying <span class="keyword">input</span> and output image
+</code></pre>
         
           <p class="article-more-link">
-            <a href="/2015/05/05/travel_guide_dennis/#more">Read More</a>
+            <a href="/2014/06/09/ILPF/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/05/travel_guide_dennis/" data-id="ci9cho94v0003j0fmfa5sykcj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2014/06/09/ILPF/" data-id="ci9cho959000lj0fm3izpkt36" class="article-share-link">Share</a>
       
-        <a href="http://yoursite.com/2015/05/05/travel_guide_dennis/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://yoursite.com/2014/06/09/ILPF/#disqus_thread" class="article-comment-link">Comments</a>
       
       
     </footer>
@@ -112,14 +182,14 @@
 
 
   
-    <article id="post-what_I_should_do_in_Riga" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-story of lenna" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/01/24/what_I_should_do_in_Riga/" class="article-date">
-  <time datetime="2015-01-24T15:45:00.000Z" itemprop="datePublished">1月 24 2015</time>
+    <a href="/2014/05/31/story of lenna/" class="article-date">
+  <time datetime="2014-05-31T18:11:11.000Z" itemprop="datePublished">5月 31 2014</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Travelling/">Travelling</a>
+    <a class="article-category-link" href="/categories/Image-processing/">Image processing</a>
   </div>
 
   </div>
@@ -130,7 +200,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/24/what_I_should_do_in_Riga/">What I should do in RIAG</a>
+      <a class="article-title" href="/2014/05/31/story of lenna/">莱纳的故事</a>
     </h1>
   
 
@@ -138,178 +208,66 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>Amazing Waffle in market </li>
-<li>Cheese cake </li>
-<li>Latvian Festive </li>
-<li>A big cup of coffee</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/01/24/what_I_should_do_in_Riga/" data-id="ci9cho9470000j0fm5t9lpevw" class="article-share-link">Share</a>
-      
-        <a href="http://yoursite.com/2015/01/24/what_I_should_do_in_Riga/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-newton-method " class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/19/newton-method /" class="article-date">
-  <time datetime="2014-10-18T22:00:00.000Z" itemprop="datePublished">10月 19 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/19/newton-method /">Newton’s Method</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>The Newton’s Method is the efficient method to look for the zero point of <strong>f(x)</strong>, now we apply this method to find the lowest value of <strong>f(x)</strong>. So we can consider it as the extend algorithm of Newton’s Method.</p>
-<p>BE CAREFUL: In wiki, the Newton method is <strong>x[k+1] = x[k] - f(x[k])/f’(x[k]) </strong> </p>
-<p><img src="http://pic.yupoo.com/frankldm/E8Rr36MM/medish.jpg" alt="Newton’s Method"> </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/19/newton-method /" data-id="ci9cho951000aj0fmufgdeojm" class="article-share-link">Share</a>
-      
-        <a href="http://yoursite.com/2014/10/19/newton-method /#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ingredient:" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/02/ingredient:/" class="article-date">
-  <time datetime="2014-10-02T19:05:11.000Z" itemprop="datePublished">10月 2 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Recipe/">Recipe</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/02/ingredient:/">Marinated Beef</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Ingredient:">Ingredient:</h2><ol>
-<li>Bay leaf               — 3 pieces</li>
-<li>Illicium verum        — 2 </li>
-<li>Cinnamon                — 1 </li>
-<li>Sichuan pepper        — 10</li>
-<li>Sugar                 — 15g</li>
-<li>Soy sauce            — 5 Spoon</li>
-<li>Beer                 — 1/4 can</li>
-<li>Salt                    — 1 Spoon</li>
-</ol>
-<h2 id="Preparation:">Preparation:</h2><ol>
-<li>Clean beef shank you purchase from shop, put them with <code>cold water</code> into stainless steel pot and turn gas stove on. Until the water is boiling, then turn off. </li>
-</ol>
-<ol>
-<li><p>Take beef shank out of pot and cooling them for 30min.</p>
-</li>
-<li><p>Clean the pot and add <code>ingredient[2~8]</code> into, also fill with cold water around half of the pot, also put the cooling beef shank in.</p>
-</li>
-<li><p>Turn gas stove on and move the button to the biggest fire for 15min, then change to small one for 90min.</p>
-</li>
-<li><p>Take the beef shank out of pot again, and cooling them again for 30min or more. Then put them back with small fire for 90min.</p>
-</li>
-<li><p>Done</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/02/ingredient:/" data-id="ci9cho953000dj0fm7xjozynh" class="article-share-link">Share</a>
-      
-        <a href="http://yoursite.com/2014/10/02/ingredient:/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-some_advises_for_amir&#39;_travel_to_china" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/02/some_advises_for_amir'_travel_to_china/" class="article-date">
-  <time datetime="2014-10-02T19:05:00.000Z" itemprop="datePublished">10月 2 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Travelling/">Travelling</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/02/some_advises_for_amir'_travel_to_china/">Some advises for Amir&#39; travel to China</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Travel_Guide">Travel Guide</h1><p>There is english website for foreigner travellers.<br><code>http://www.travelchinaguide.com/</code></p>
+        <p><img src="http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png" alt="Lenna"> </p>
+<p>
         
           <p class="article-more-link">
-            <a href="/2014/10/02/some_advises_for_amir'_travel_to_china/#more">Read More</a>
+            <a href="/2014/05/31/story of lenna/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/02/some_advises_for_amir'_travel_to_china/" data-id="ci9cho94z0008j0fm8ya61vbk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2014/05/31/story of lenna/" data-id="ci9cho94x0005j0fmvp2wyses" class="article-share-link">Share</a>
       
-        <a href="http://yoursite.com/2014/10/02/some_advises_for_amir'_travel_to_china/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://yoursite.com/2014/05/31/story of lenna/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-first-blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/05/31/first-blog/" class="article-date">
+  <time datetime="2014-05-31T18:00:00.000Z" itemprop="datePublished">5月 31 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/intro/">intro</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/05/31/first-blog/">第一篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://darrarski.pl/wp-content/uploads/2013/12/github_logo.png" alt="Gitbub icon"><br><img src="http://img.36tr.com/9bc00900-c9d0-429b-89f2-b4969ad5787e.jpg?imageView/1/w/256/h/256" alt="Dnspod"><br>
+        
+          <p class="article-more-link">
+            <a href="/2014/05/31/first-blog/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/05/31/first-blog/" data-id="ci9cho954000gj0fm2icdwu0v" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2014/05/31/first-blog/#disqus_thread" class="article-comment-link">Comments</a>
       
       
     </footer>
@@ -321,7 +279,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </nav>
   
 </section>
