@@ -235,6 +235,133 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/09/norm of a matrix/" itemprop="url">
+                  范数的意义
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-09T00:00:00+02:00" content="May 9 2016">
+              May 9 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Mathematics/" itemprop="url" rel="index">
+                    <span itemprop="name">Mathematics</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/09/norm of a matrix/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/09/norm of a matrix/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="范数的意义"><a href="#范数的意义" class="headerlink" title="范数的意义"></a>范数的意义</h2><p>###线性代数<br>为了通俗简单的介绍范数, 首先是一个最简单的线性等式:<br>    $$ A  = x \times B $$<br>其中, $A$ 可以是一个数, 也可以是一个矩阵甚至于一个事件, 想对应的 $B$ 也是类似于 $A$ 的一个表达式, 而连接等式两边的 $x$ 便是一个映射(project). 在这里, $x$ 是一个从 $A$ 所在的空间, 投射到 $B$ 所在的空间, 这样的过程, 本身就是一个函数, 这里的投射可以是人类可以感知的三维空间, 也可以是超出想象的多维空间. 而为了清楚明白的了解这个投射函数的意义, 我们需要对这个函数的本质了解, 比如矩阵的秩(rank),<br>    \[\mathbf{A} =  \begin{vmatrix}<br>1 &amp; 2 &amp; 3\\<br>2 &amp; 3 &amp; 4 \\<br>3&amp; 6 &amp; 9\end{vmatrix} \]<br>其中 $A$ 的秩就是2, 因为第一行(row)和第三行是线性相关, 就是说矩阵 $A$ 的线性空间是2维, 而非3维. <strong>所以矩阵的秩(rank)体现了矩阵的空间维数. </strong></p>
+<p>###逆矩阵<br>再比如矩阵的逆矩阵(invertible), 根据定义: 一个 $T \in \mathbf{L}(V, W)$ 称为可逆, 如果存在线性映射 $S \in \mathbf{L}(W, V)$,  且存在 $$ST = I,  TS = I$$ 其中第一个 $I \in \mathbf{V}$,  第二个 $I \in \mathbf{W}$. <strong>可逆的矩阵的意义可以解释为, 可以通过这样可逆映射, 来实现不同空间下的双向映射</strong>. </p>
+<p>然后就是提到本文的重点范数(norm), 这里的范数可以分为2类, 一类是向量(vector)的范数, 还有一个是矩阵(matrix)的范数. </p>
+<p>###p-范数<br>向量 $x$ 的 $p$ 阶范数是:<br>    \[ \mathbf{ || x ||}_{p} =  \begin{cases}<br>(\sum| x|^{p})^{1/p},  &amp;if 1 \leq p &lt; \infty  \\<br>{max}  | x|,  &amp;  if p = \infty \\<br>\end{cases} \]</p>
+<p>矩阵 $A \in C^{n \times m} $ 的 诱导范数(induced norm):<br>    \[ \mathbf{ || A ||}= \sup _{0\neq x \in C^{m} } \frac{ || Ax ||}{||x ||} \]</p>
+<p>###范数理解<br><strong>范数反映了线性映射把一个向量映射为另一个向量, 向量的“长度”缩放的比例. </strong><br>在这里，补充一个对 $H_{\infty}$ 范数非常棒的解释:</p>
+<blockquote>
+<p>H无穷范数是信号2范数的诱导范数,一般稳定的控制系统要求从扰动或者噪声导输出的能量(2范数)增益小于1<br>首先，范数是一个向量大小的度量或一个系统增益的度量。向量范数越大，表示该向量越“大”，系统的范数越大，表示该系统的增益越“大“，即对输入信号的”放大”作用越强。对于一个向量，要衡量其大小，有不同的准则，不同的准则可定义不同的范数，这一点不同于标量，因为标量是比较简单的，一个标量的绝对值就可以视为它的范数，绝对值越大，表示该标量越大，这没什么争议。向量则比这要复杂，对于一个向量可以定义很多范数，比如最常见的欧几里得范数等等。对于一个多输入多输出的系统来说，可认为输入的信号是一个向量，输入的信号也是向量，比如三输入四输出的系统，可认为输入是一个三维向量，输出一个四维向量。取输出向量的范数和输入向量范数的比值，并取其上确界，就是该系统的范数，并称该系统范数为由信号范数导出的范数。一个系统的H无穷范数就是其输入输出信号的2范数的导出范数。表示了该系统对输入信号的能量或功率的放大程度.</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/10/19/newton-method /" itemprop="url">
                   Newton’s Method
                 </a>
@@ -770,7 +897,7 @@ imshow(f),figure,imshow(g,[ ]);       % Displaying input and output image
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
